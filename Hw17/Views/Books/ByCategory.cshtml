@@ -1,0 +1,23 @@
+﻿@model List<Hw17.Models.Entities.Book>
+
+<h2>Books in Category</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>نام کتاب</th>
+            <th>نویسنده</th>
+            <th>تاریخ انتشار</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var book in Model)
+        {
+            <tr>
+                <td>@book.Title</td>
+                <td>@book.Author</td>
+                <td>@book.PublishedDate.ToShortDateString()</td>
+            </tr>
+        }
+    </tbody>
+</table>

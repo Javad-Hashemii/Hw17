@@ -1,0 +1,35 @@
+﻿@model Hw17.Models.Dtos.HomeViewDto
+@{
+    ViewData["Title"] = "صفحه اصلی";
+}
+
+<div class="big-box">
+    <h1>کتابخانه</h1>
+    <p>جدیدترین کتاب‌ها و دسته‌بندی‌ها را اینجا پیدا کنید</p>
+    <a href="/Books" class="hero-btn">مشاهده کتاب‌ها</a>
+</div>
+
+<h2>دسته بندی ها</h2>
+<div class="categories">
+    @foreach (var category in Model.Categories.Take(5))
+    {
+        <div class="category-card">
+            <img src="@category.ImageUrl" alt="@category.Name" class="category-img" />
+            <div class="category-name">@category.Name</div>
+        </div>
+    }
+</div>
+
+
+<h2>جدیدترین کتاب‌ها</h2>
+<div class="books">
+    @foreach (var book in Model.NewestBooks.Take(5))
+    {
+        <div class="book-card">
+            <img src="@book.ImageUrl" alt="@book.Title" />
+            <div class="book-title">@book.Title</div>
+            <div class="book-author">@book.Author</div>
+            <div class="book-price">قیمت: @book.Price تومان</div>
+        </div>
+    }
+</div>

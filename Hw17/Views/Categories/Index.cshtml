@@ -1,0 +1,11 @@
+﻿@model List<Hw17.Models.Entities.Category>
+<h2>دسته‌بندی‌ها</h2>
+
+<div class="categories-container">
+    @foreach (var category in Model)
+    {
+        <a href="/Books/ByCategory/@category.Id" class="category-item">
+            @category.Name
+        </a>
+    }
+</div>

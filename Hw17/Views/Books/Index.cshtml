@@ -1,0 +1,22 @@
+﻿@model List<Hw17.Models.Entities.Book>
+
+@{
+    ViewData["Title"] = "همه‌ی کتاب‌ها";
+}
+
+<h2>تمام کتاب‌ها</h2>
+
+<div class="all-books-container">
+    @foreach (var book in Model)
+    {
+        <div class="all-books-card">
+            <img src="@book.ImageUrl" alt="@book.Title" />
+            <h3>@book.Title</h3>
+            <p>نویسنده: @book.Author</p>
+            <p>دسته‌بندی: @book.Category.Name</p>
+            <p>تاریخ انتشار: @book.PublishedDate.ToString("yyyy/MM/dd")</p>
+            <p>قیمت: @book.Price تومان</p>
+        </div>
+    }
+
+</div>
