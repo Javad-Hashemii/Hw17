@@ -1,54 +1,46 @@
 ﻿@model Hw17.Models.Dtos.UserRegisterDto
 @{
-    ViewData["Title"] = "ثبت‌نام";
+    ViewData["Title"] = "افزودن کاربر جدید";
 }
 
-<div class="register-container">
-    <h2>ایجاد حساب کاربری</h2>
+<div class="admin-register-container">
+    <h2 class="admin-register-title">ثبت‌نام کاربر جدید</h2>
 
-    <form asp-action="Register" method="post" class="register-form">
+    <form asp-action="Register" method="post" class="admin-register-form">
         <div class="form-group">
-            <label>نام</label>
-            <input asp-for="FirstName" class="form-control" required />
-        </div>
-
-        <div class="form-group">
-            <label>نام خانوادگی</label>
-            <input asp-for="LastName" class="form-control" required />
-        </div>
-
-        <div class="form-group">
-            <label>شماره تماس</label>
-            <input asp-for="PhoneNumber" class="form-control" required />
-        </div>
-
-        <div class="form-group">
-            <label>نام کاربری</label>
+            <label asp-for="Username">نام کاربری</label>
             <input asp-for="Username" class="form-control" required />
         </div>
 
         <div class="form-group">
-            <label>رمز عبور</label>
+            <label asp-for="Password">رمز عبور</label>
             <input asp-for="Password" type="password" class="form-control" required />
         </div>
 
-        <div class="form-group role-group">
-            <label>نقش</label>
+        <div class="form-group">
+            <label asp-for="FirstName">نام</label>
+            <input asp-for="FirstName" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="LastName">نام خانوادگی</label>
+            <input asp-for="LastName" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="PhoneNumber">شماره تلفن</label>
+            <input asp-for="PhoneNumber" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="IsAdmin">نقش کاربر</label>
             <select asp-for="IsAdmin" class="form-control">
-                <option value="false">مشتری</option>
+                <option value="false" selected>کاربر معمولی</option>
                 <option value="true">ادمین</option>
             </select>
         </div>
 
-        <button type="submit" class="btn-submit">ثبت‌نام</button>
-
-        <p class="login-link">
-            حساب دارید؟ <a href="/Account/Login">ورود</a>
-        </p>
-
-        @if (ViewBag.Error != null)
-        {
-            <p class="error-message">@ViewBag.Error</p>
-        }
+        <button type="submit" class="btn btn-register">ثبت‌نام</button>
+        <a href="/Admin/Users" class="btn btn-back">بازگشت</a>
     </form>
 </div>
