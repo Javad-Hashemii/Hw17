@@ -23,9 +23,6 @@ namespace Hw17.Controllers
         [HttpPost]
         public IActionResult Register(UserRegisterDto dto)
         {
-            if (!ModelState.IsValid)
-                return View(dto);
-
             var result = _userService.Register(dto);
             if (!result.IsSuccess)
             {

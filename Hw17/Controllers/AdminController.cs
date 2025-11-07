@@ -19,7 +19,6 @@ namespace Hw17.Controllers
 
         public IActionResult Index()
         {
-            // ✅ get users from database (not in-memory)
             var users = _userService.GetAll();
             return View(users);
         }
@@ -40,7 +39,6 @@ namespace Hw17.Controllers
         public IActionResult Activate(int id)
         {
             var result = _userService.ActivateUser(id);
-            TempData["Message"] = result.Message;
             return RedirectToAction("Users");
         }
 
@@ -53,9 +51,6 @@ namespace Hw17.Controllers
         [HttpPost]
         public IActionResult Register(UserRegisterDto dto)
         {
-            if (!ModelState.IsValid)
-                return View(dto);
-
             var result = _userService.Register(dto);
             if (!result.IsSuccess)
             {
@@ -63,7 +58,6 @@ namespace Hw17.Controllers
                 return View(dto);
             }
 
-            TempData["Message"] = "کاربر با موفقیت ثبت شد.";
             return RedirectToAction("Users");
         }
 
@@ -72,10 +66,8 @@ namespace Hw17.Controllers
         public IActionResult Deactivate(int id)
         {
             var result = _userService.DeactivateUser(id);
-            TempData["Message"] = result.Message;
             return RedirectToAction("Users");
         }
-        // ===== CATEGORIES =====
         public IActionResult Categories()
         {
             var categories = _categoryService.GetCategories();
@@ -86,7 +78,6 @@ namespace Hw17.Controllers
         public IActionResult Add(string name, string imageUrl)
         {
             var result = _categoryService.Add(name, imageUrl);
-            TempData["Message"] = result.Message;
             return RedirectToAction("Index");
         }
 
@@ -94,7 +85,6 @@ namespace Hw17.Controllers
         public IActionResult Delete(int id)
         {
             var result = _categoryService.Delete(id);
-            TempData["Message"] = result.Message;
             return RedirectToAction("Index");
         }
 
@@ -102,7 +92,6 @@ namespace Hw17.Controllers
         public IActionResult Edit(int id, string newName)
         {
             var result = _categoryService.UpdateName(id, newName);
-            TempData["Message"] = result.Message;
             return RedirectToAction("Index");
         }
 
