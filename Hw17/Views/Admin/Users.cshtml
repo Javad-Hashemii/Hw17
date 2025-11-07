@@ -1,0 +1,84 @@
+﻿@model List<Hw17.Models.Dtos.UserDto>
+
+@{
+    ViewData["Title"] = "مدیریت کاربران";
+}
+
+<h2 class="page-title">مدیریت کاربران</h2>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert">@TempData["Message"]</div>
+}
+
+<div class="admin-actions">
+    <a class="btn btn-primary" href="/Admin/Register">+ ثبت‌نام کاربر جدید</a>
+</div>
+
+<table class="user-table">
+    <thead>
+        <tr>
+            <th>شناسه</th>
+            <th>نام کاربری</th>
+            <th>نام</th>
+            <th>نام خانوادگی</th>
+            <th>شماره تلفن</th>
+            <th>نقش</th>
+            <th>وضعیت</th>
+            <th>عملیات</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Id</td>
+                <td>@user.Username</td>
+                <td>@user.FirstName</td>
+                <td>@user.LastName</td>
+                <td>@user.PhoneNumber</td>
+                <td>
+                    @if (user.IsAdmin)
+                    {
+                        <text>ادمین</text>
+                    }
+                    else
+                    {
+                        <text>کاربر</text>
+                    }
+                </td>
+
+                <td>
+                    @if (user.IsActive)
+                    {
+                        <text>فعال</text>
+                    }
+                    else
+                    {
+                        <text>غیرفعال</text>
+                    }
+                </td>
+
+                <td>
+                    @if (user.IsActive)
+                    {
+                        <form method="post" action="/Admin/Deactivate/@user.Id" style="display:inline;">
+                            <button type="submit" class="btn btn-warning">غیرفعال</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <form method="post" action="/Admin/Activate/@user.Id" style="display:inline;">
+                            <button type="submit" class="btn btn-success">فعال</button>
+                        </form>
+                    }
+
+                    <form method="post" action="/Admin/DeleteUser/@user.Id" style="display:inline;">
+                        <button type="submit" class="btn btn-delete">حذف</button>
+                    </form>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,54 @@
+﻿@model Hw17.Models.Dtos.UserRegisterDto
+@{
+    ViewData["Title"] = "ثبت‌نام";
+}
+
+<div class="register-container">
+    <h2>ایجاد حساب کاربری</h2>
+
+    <form asp-action="Register" method="post" class="register-form">
+        <div class="form-group">
+            <label>نام</label>
+            <input asp-for="FirstName" class="form-control" required />
+        </div>
+
+        <div class="form-group">
+            <label>نام خانوادگی</label>
+            <input asp-for="LastName" class="form-control" required />
+        </div>
+
+        <div class="form-group">
+            <label>شماره تماس</label>
+            <input asp-for="PhoneNumber" class="form-control" required />
+        </div>
+
+        <div class="form-group">
+            <label>نام کاربری</label>
+            <input asp-for="Username" class="form-control" required />
+        </div>
+
+        <div class="form-group">
+            <label>رمز عبور</label>
+            <input asp-for="Password" type="password" class="form-control" required />
+        </div>
+
+        <div class="form-group role-group">
+            <label>نقش</label>
+            <select asp-for="IsAdmin" class="form-control">
+                <option value="false">مشتری</option>
+                <option value="true">ادمین</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn-submit">ثبت‌نام</button>
+
+        <p class="login-link">
+            حساب دارید؟ <a href="/Account/Login">ورود</a>
+        </p>
+
+        @if (ViewBag.Error != null)
+        {
+            <p class="error-message">@ViewBag.Error</p>
+        }
+    </form>
+</div>

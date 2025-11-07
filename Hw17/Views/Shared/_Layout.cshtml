@@ -7,13 +7,21 @@
 </head>
 <body>
     <div class="navbar">
-        <a href="/">صفحه اصلی</a>
-        <a href="/Categories">دسته بندی ها</a>
-        <a href="/Books/AddBook">اضافه کردن کتاب</a>
+        <div class="nav-left">
+            <a href="/">صفحه اصلی</a>
+            <a href="/Categories">دسته‌بندی‌ها</a>
+            <a href="/Books/AddBook">افزودن کتاب</a>
+        </div>
+        <div class="nav-right">
+            <a href="/Account/Login" class="btn-login">ورود</a>
+            <a href="/Account/Register" class="btn-register">ثبت‌نام</a>
+        </div>
     </div>
+
     <main>
         @RenderBody()
     </main>
+
     <footer class="site-footer">
         <p>Hw17</p>
     </footer>

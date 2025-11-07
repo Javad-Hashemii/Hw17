@@ -18,19 +18,42 @@ namespace Hw17.Models.Services
 
         public List<Book> GetNewestBooks()
         {
+            var books = _bookRepo.GetBooksByNewestPublishedDate();
+
+            if (books == null)
+                throw new Exception("خطا در دریافت لیست کتاب‌ها.");
+
+            if (!books.Any())
+                throw new Exception("هیچ کتابی یافت نشد.");
+
             return _bookRepo.GetBooksByNewestPublishedDate();
         }
 
         public List<Book> GetBooksByCategoryId(int categoryId)
         {
-            return _bookRepo.GetBooksByCategoryID(categoryId);
+            var books = _bookRepo.GetBooksByCategoryID(categoryId);
+
+            if (books == null)
+                throw new Exception("خطا در دریافت کتاب‌ها برای این دسته‌بندی.");
+
+            return books;
         }
 
         public void AddBook(AddBookDto bookDto)
         {
-            var imageAddress= _fileService.Upload(bookDto.Image,"Books");
+            if (bookDto.Image == null)
+                throw new Exception("تصویر کتاب الزامی است.");
+
+            var imageAddress = _fileService.Upload(bookDto.Image, "Books");
+
+            if (string.IsNullOrEmpty(imageAddress))
+                throw new Exception("بارگذاری تصویر انجام نشد.");
+
             bookDto.ImageUrl = imageAddress;
+
             _bookRepo.AddBook(bookDto);
         }
+
+
     }
 }

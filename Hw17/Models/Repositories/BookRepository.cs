@@ -17,14 +17,19 @@ namespace Hw17.Models.Repositories
 
         public List<Book> GetBooksByNewestPublishedDate()
         {
-            return _context.Books.Include(b => b.Category)
-                                      .OrderByDescending(b => b.PublishedDate)
-                                      .ToList();
+            return _context.Books
+                .AsNoTracking()
+                .Include(b => b.Category)
+                .OrderByDescending(b => b.PublishedDate)
+                .ToList();
         }
 
         public List<Book> GetBooksByCategoryID(int categoryID)
         {
-            return _context.Books.Where(b => b.CategoryId == categoryID).ToList();
+            return _context.Books
+                .AsNoTracking()
+                .Where(b => b.CategoryId == categoryID)
+                .ToList();
         }
 
         public void AddBook(AddBookDto bookDto)

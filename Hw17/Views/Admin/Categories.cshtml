@@ -1,0 +1,43 @@
+﻿@model List<Hw17.Models.Entities.Category>
+
+@{
+    ViewData["Title"] = "مدیریت دسته‌بندی‌ها";
+}
+
+<h2 class="page-title">مدیریت دسته‌بندی‌ها</h2>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert">@TempData["Message"]</div>
+}
+
+<table class="user-table">
+    <thead>
+        <tr>
+            <th>شناسه</th>
+            <th>نام دسته‌بندی</th>
+            <th>تصویر</th>
+            <th>عملیات</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var category in Model)
+        {
+            <tr>
+                <td>@category.Id</td>
+                <td>
+                    <form method="post" action="/Admin/Edit/@category.Id" class="inline-form">
+                        <input type="text" name="newName" value="@category.Name" required />
+                        <button type="submit" class="btn btn-success">ذخیره</button>
+                    </form>
+                </td>
+                <td><img src="@category.ImageUrl" alt="@category.Name" width="60" height="60" /></td>
+                <td>
+                    <form method="post" action="/Admin/Delete/@category.Id" style="display:inline;">
+                        <button type="submit" class="btn btn-delete">حذف</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
